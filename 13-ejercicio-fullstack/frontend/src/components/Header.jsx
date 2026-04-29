@@ -59,6 +59,7 @@ export function Header(){
                     <>
                         <NavLink to="/profile">Perfil</NavLink>
                         <NavLink to="/saves">Guardados ({numberOfFavorites})</NavLink>
+                        <NavLink to="/manage-jobs">Gestionar Jobs</NavLink>
                     </>
                   )
               }

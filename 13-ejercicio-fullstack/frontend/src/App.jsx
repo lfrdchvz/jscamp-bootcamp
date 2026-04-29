@@ -15,6 +15,8 @@ const SignUpPage = lazy(() => import('./pages/SignUp.jsx'))
 const ProfilePage = lazy(() => import('./pages/Profile.jsx'))
 const NotFoundPage = lazy(() => import('./pages/404.jsx'))
 const PageTransition = lazy(() => import('./components/PageTransition.jsx'))
+const ManageJobsPage = lazy(() => import('./pages/ManageJobs.jsx'))
+const JobFormPage = lazy(() => import('./pages/JobForm.jsx'))
 
 
 function App() {
@@ -36,6 +38,21 @@ function App() {
                 </ProtectedRoute>     
               } 
             />
+            <Route path="/manage-jobs" element={
+              <ProtectedRoute redirectTo='/signin'>
+                <ManageJobsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/manage-jobs/new" element={
+              <ProtectedRoute redirectTo='/signin'>
+                <JobFormPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/manage-jobs/edit/:jobId" element={
+              <ProtectedRoute redirectTo='/signin'>
+                <JobFormPage />
+              </ProtectedRoute>
+            } />
             <Route path="/jobs/:jobId" element={<DetailPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
