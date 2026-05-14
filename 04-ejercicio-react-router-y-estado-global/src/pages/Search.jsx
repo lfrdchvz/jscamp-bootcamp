@@ -27,6 +27,8 @@ export default function SearchPage() {
 
     const title = loading ? 'Cargando...' : `Resultados: ${total}, pagina ${currentPage} - DevJobs`;
 
+    // Este useEffect depende de `searchParams` (que se encuentra dentro de useFilters) y de `searchParams` que también se encuentra ahí.
+    // Por lo tanto, podemos agregar ese `useEffect` dentro de `useFilters` y eliminar este.
     useEffect(() => {
         const textFromUrl = searchParams.get('text') || '';
         const technologyFromUrl = searchParams.get('technology') || '';
