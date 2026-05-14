@@ -1,5 +1,3 @@
-// Las imagenes no se importan de esta manera
-// import backgroundImg from '/public/background.avif'
 import styles from './Home.module.css'
 
 import { useRouter } from '../hooks/useRouter.jsx';
@@ -11,7 +9,6 @@ export default function HomePage() {
     return (
         <main>
             <section className={ styles.section }>
-                {/* Las imagenes se importan de esta manera cuando estan en public */}
                 <img className={ styles.sectionImg } src={'/background.webp'} alt="" />
                 <h1 className={ styles.title }>Encuentra el trabajo de tus sueños</h1>
                 <p className={ styles.textParagraph }>Únete a la comunidad más grande de desarrolladores y encuentra tu proxima oportunidad</p>

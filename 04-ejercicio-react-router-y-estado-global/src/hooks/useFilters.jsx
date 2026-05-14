@@ -13,47 +13,17 @@ export function useFilters() {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [filters, setFilters] = useState(() => {
-        // podemos simplificar esto en:
 
-        // 1. Si tenemos info en localStorage, la usamos
         const localStorageSavedFilters = localStorage.getItem('jobFilters');
         if (localStorageSavedFilters) {
             return JSON.parse(localStorageSavedFilters);
         }
 
-        // 2. Si no es así, retornamos los filtros por URL o por defecto
         return {
             technology: searchParams.get('technology') || '',
             location: searchParams.get('type') || '',
             experienceLevel: searchParams.get('level') || ''
-        }        
-
-        /* const urlSavedFilters = {
-            technology: searchParams.get('technology') ?? '',
-            location: searchParams.get('type') ?? '',
-            experienceLevel: searchParams.get('level') ?? ''
-        };
-
-        const technologyFromUrl = searchParams.get('technology') ?? '';
-        const locationFromUrl = searchParams.get('type') ?? '';
-        const experienceLevelFromUrl = searchParams.get('level') ?? '';
-
-        if (technologyFromUrl || locationFromUrl || experienceLevelFromUrl) {
-            return {
-                technology: technologyFromUrl,
-                location: locationFromUrl,
-                experienceLevel: experienceLevelFromUrl
-            };
-        }
-
-        try {
-            const saved = localStorage.getItem('jobFilters');
-            if (saved) return JSON.parse(saved);
-        } catch {
-            
-        }
-
-        return INITIAL_FILTERS; */
+        } 
     });
 
     const [textToFilter, setTextToFilter] = useState(() => {
@@ -62,7 +32,6 @@ export function useFilters() {
 
     const [currentPage, setCurrentPage] = useState(() => {
         const parsedNumber = Number(searchParams.get('page'))
-        // Agregamos un par de filtros para que la página sea siempre mayor o igual a 1
         if(parsedNumber < 1) return 1
         return Number.isNaN(parsedNumber) ? 1 : parsedNumber
     });
@@ -75,7 +44,6 @@ export function useFilters() {
 
     const hasActiveFilters = Object.values(filters).some(value => value !== '') || textToFilter !== '';
 
-    // Sincroniza el estado cuando la URL cambia externamente
     useEffect(() => {
         const technologyFromUrl = searchParams.get('technology') ?? '';
         const locationFromUrl = searchParams.get('type') ?? '';
@@ -123,7 +91,6 @@ export function useFilters() {
                 setSearchParams(params);
 
                 const queryParams = params.toString();
-                // await new Promise(resolve => setTimeout(resolve, 2000));
                 const response = await fetch(`https://jscamp-api.vercel.app/api/jobs?${queryParams}`);
 
                 if (!response.ok) {
