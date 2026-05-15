@@ -1,5 +1,7 @@
 import { createServer } from 'node:http'
 import { randomUUID } from 'node:crypto'
+// Con esto podemos trabajar con JSON desde streams
+import { json } from 'node:stream/consumers';
 
 process.loadEnvFile()
 
@@ -69,12 +71,20 @@ const users = [
 ]
 
 
-const json = (req) => new Promise((resolve) => {
+// Con la importación que hicimos, no hace falta esto
+/* const json = (req) => new Promise((resolve) => {
   let body = ''
   req.on('data', (chunk) => { body += chunk })
   req.on('end', () => { resolve(JSON.parse(body)) })
-})
+}) */
 
+// La consigna especificaba crear este helper, para poder responder con JSON sin tener que replicarlo en cada sitio
+const sendJson = function(res, statusCode, data) {
+    res.statusCode = statusCode;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    return res.end(JSON.stringify(data));
+}
+  
 const server = createServer(async (req, res) => {
 
   const { pathname, searchParams } = new URL(req.url, `http://localhost:${port}`)
@@ -83,12 +93,11 @@ const server = createServer(async (req, res) => {
   // EJERCICIO 3
   // ===========
   if (req.method === 'GET' && pathname === '/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify({
+    // Lo podemos usar de esta manera
+    return sendJson(res, 200, {
       status: 'ok',
       uptime: process.uptime()
-    }))
-    return
+    })
   }
 
   // ===============
@@ -110,27 +119,52 @@ const server = createServer(async (req, res) => {
       )
     }
 
-    if (minAgeFilter) {
+    if (minAgeFilter) {      
+      // Podemos hacer más validaciones
+      const isInvalidAge = Number.isNaN(Number(minAgeFilter)) || Number(minAgeFilter) < 0
+
+      if(isInvalidAge) {
+        return sendJson(res, 400, { error: 'Invalid age filter' })
+      }
+
       filteredUsers = filteredUsers.filter(user =>
         user.age >= Number(minAgeFilter)
       )
     }
 
     if (maxAgeFilter) {
+      // Podemos hacer más validaciones
+      const isInvalidAge = Number.isNaN(Number(maxAgeFilter)) || Number(maxAgeFilter) < 0
+
+      if(isInvalidAge) {
+        return sendJson(res, 400, { error: 'Invalid age filter' })
+      }
+
       filteredUsers = filteredUsers.filter(user =>
         user.age <= Number(maxAgeFilter)
       )
     }
 
     if (limitFilter && offsetFilter) {
-      const limit  = Number(limitFilter)
-      const offset = Number(offsetFilter)
+      // Redondeamos para evitar problemas con decimales, si el usuario ingresa uno
+      const limit  = Math.floor(Number(limitFilter))
+      const offset = Math.floor(Number(offsetFilter))
+
+      // Validamos que el offset no sea negativo
+      if (offset < 0) {
+        return sendJson(res, 400, { error: 'Invalid offset filter' })
+      }
+
+      // Validamos que el limit no sea negativo
+      if (limit < 0) {
+        return sendJson(res, 400, { error: 'Invalid limit filter' })
+      }
+
       filteredUsers = filteredUsers.slice(offset, offset + limit)
     }
 
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(filteredUsers))
-    return
+    // Lo podemos enviar así
+    return sendJson(res, 200, filteredUsers)
   }
 
   // ===========
@@ -147,16 +181,13 @@ const server = createServer(async (req, res) => {
 
     users.push(newUser)
 
-    res.writeHead(201, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(newUser))
-    return
+    return sendJson(res, 201, newUser)
   }
 
   // ===========
   // EJERCICIO 4
   // ===========
-  res.writeHead(404, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ error: 'Ruta no encontrada' }))
+  return sendJson(res, 404, { error: 'Ruta no encontrada' })
 })
 
 server.listen(port, () => {
