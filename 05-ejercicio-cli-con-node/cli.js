@@ -23,8 +23,14 @@ const formatBytes = (fileSize) => {
     return `${(fileSize / 1024).toFixed(2)} KB`
 }
 
-
-const fileNames = await readdir(targetDir)
+// Agregamos un error handling para el caso de que el directorio no exista
+let fileNames
+try {
+    fileNames = await readdir(targetDir)
+} catch (error) {
+    console.error('Error al leer el directorio:', error.message)
+    process.exit(1)
+}
 
 const entries = await Promise.all(
     fileNames.map(async (fileName) => {
