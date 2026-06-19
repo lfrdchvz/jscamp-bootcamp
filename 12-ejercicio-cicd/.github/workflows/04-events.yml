@@ -1,0 +1,29 @@
+name: 04 - Events
+
+on:
+  issues:
+    types: [opened, assigned]
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+jobs:
+  inspect-event:
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    steps:
+      - name: Mostrar evento
+        run: |
+          echo "Evento: ${{ github.event_name }}"
+          echo "Issue número: ${{ github.event.issue.number }}"
+          echo "Cuerpo del comentario: ${{ github.event.comment.body }}"
+
+      - name: Comentar en issue nueva
+        if: ${{ github.event_name == 'issues' && github.event.action == 'opened' }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "¡Gracias por tu aporte! 🙌 Revisaremos tu issue pronto."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
