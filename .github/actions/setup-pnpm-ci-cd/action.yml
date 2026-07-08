@@ -6,8 +6,8 @@ inputs:
     description: Node.js version
     default: '24'
   pnpm-version:
+    default: '10'
     description: pnpm version
-    default: '11'
 
 runs:
   using: composite
