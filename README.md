@@ -2,10 +2,28 @@
 
 En este repositorio podrás ir entregando los ejercicios del bootcamp
 
-> ¡No modifiques este archivo! Se irá actualizando con los nuevos ejercicios a lo largo del curso.
-
 ## Ejercicios
 
-| #   | Ejercicio    | Descripción                            | Código                                                                                                                 |
-| --- | ------------ | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| 1   | **html-css** | Desarrolla la página de `empleos.html` | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/01-ejercicio-html-css/tree/main/README.md) |
+| #   | Ejercicio                                 | Descripción                                                                                          | Código                                                                                                                                          |
+| --- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | **html-css**                              | Replica la página de "Resultados de Búsqueda" en `empleos.html` con HTML y CSS responsivo.          | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/01-ejercicio-html-css/README.md)                          |
+| 2   | **javascript**                            | Añade interactividad con JavaScript a la página de empleos: fetch, filtros, renderizado dinámico.    | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/02-ejercicio-javascript/README.md)                        |
+| 3   | **react**                                 | Componentización, props, renderizados condicionales, paginación, filtros, SPA y fetch a una API.     | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/03-ejercicio-react/README.md)                             |
+| 4   | **react-router-y-estado-global**          | React Router, página de detalles, sincronización con `useSearchParams`, lazy loading y Zustand.     | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/04-ejercicio-react-router-y-estado-global/README.md)      |
+| 5   | **cli-con-node**                          | Script CLI con `fs/promises` que lista archivos/carpetas con orden, filtros y permisos.              | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/05-ejercicio-cli-con-node/README.md)                       |
+| 6   | **servidor-con-node**                     | API con `node:http`: CRUD de usuarios, health check, filtros, paginación y manejo de errores.        | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/06-ejercicio-servidor-con-node/README.md)                 |
+| 7   | **api-rest-con-express-y-mvc**            | API REST con Express y patrón MVC (modelo, controlador, rutas) y middleware de CORS.                | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/07-ejercicio-api-rest-con-express-y-mvc/README.md)        |
+| 8   | **testing-con-node-y-zod**                | Tests de integración con `node:test` y validación de payloads con Zod.                               | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/08-ejercicio-testing-con-node-y-zod/README.md)            |
+| 9   | **test-e2e-con-ia**                       | Tests E2E con Playwright sobre la app de React (búsqueda, filtros, paginación, detalle, aplicar).   | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/09-ejercicio-test-e2e-con-ia/README.md)                   |
+| 10  | **typescript**                            | Sistema de gestión de empleos tipado: tipos literales, objetos, funciones, interfaces, narrowing.     | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/10-ejercicio-typescript/README.md)                         |
+| 11  | **sql**                                   | Migración de `jobs.json` a SQLite con `better-sqlite3`, esquema relacional y seed.                  | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/11-ejercicio-sql/README.md)                                |
+| 12  | **cicd**                                  | Workflows de GitHub Actions: manual, schedule, eventos, pipeline CI paralelo y composite actions.    | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/12-ejercicio-cicd/README.md)                               |
+| 13  | **docker**                                | Docker de principio a fin: Dockerfiles, buenas prácticas, multi-stage, volúmenes y bind mounts.       | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/13-ejercicio-docker/README.md)                             |
+
+## Extras
+
+| #   | Ejercicio                  | Descripción                                                                                                | Código                                                                                                                                        |
+| --- | -------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| E1  | **fullstack**              | Proyecto fullstack (backend + frontend) integrando los módulos del bootcamp en una sola aplicación.        | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/extra-fullstack/)                                        |
+| E2  | **inteligencia-artificial** | Proyecto fullstack con integración de IA (backend + frontend) usando el SDK de OpenAI.                      | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/extra-inteligencia-artificial/)                          |
+| E3  | **sql**                    | Proyecto backend adicional con SQLite, similar al ejercicio 11 pero como práctica extra.                    | [![GitHub Badge](https://img.shields.io/badge/estado-por_entregar-yellow)](/extra-sql/)                                              |
